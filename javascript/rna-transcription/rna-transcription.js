@@ -1,19 +1,17 @@
 export const toRna = (dna) => {
-  const dnaArr = dna.split('');
-  const filter = dnaArr.filter(letter =>
-    letter === 'C' || letter === 'G' ||
-    letter === 'A' || letter === 'T'
-  );
-  if (filter.length !== dnaArr.length) throw new Error('Invalid input DNA.');
-  const rnaArr = dnaArr.map(letter => {
-    switch (letter) {
-      case 'C': return 'G';
-      case 'G': return 'C';
-      case 'A': return 'U';
-      case 'T': return 'A';
-    }
-  });
-  return rnaArr.join('');
-}
+  const dnaToRna = {
+    C: 'G',
+    G: 'C',
+    A: 'U',
+    T: 'A'
+  };
 
-// console.log(toRna('ACGTXXXCTTAA'));
+  const rna = dna.split('').map(letter => {
+    if (Object.keys(dnaToRna).includes(letter)) {
+      return dnaToRna[letter];
+    } else {
+      throw new Error('Invalid input DNA.');
+    }
+  }).join('');
+  return rna;
+}
